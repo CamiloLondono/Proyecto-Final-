@@ -2,4 +2,9 @@ usar el comando 'git add' podemos ponerle un '.' al final para subir todos los a
 para devolver un archivo no deseado usamos el 'git checkout' 
 para confirmar subi un arhivo usamos el 'git commit-m' y ponemos el comentario al arhivo subido 
 ultimo paso es el 'git push origin' se deja un espacio y se pone la rama a la que vamos a subir los ajustes 
-'git pull' es para bajar los archivos a mi unidad local 
+'git pull' es para bajar los archivos a mi unidad local
+------CLASE 4----------
+'form' es un formulario para enviarlos de un campo a otro
+'form.group' sirve para agrupar datos que van dentro de un mismo campo de texto
+'form.control' para que el usuario digite datos
+'alt + shif + f' sirve para acomodar la identacion del codigo 
