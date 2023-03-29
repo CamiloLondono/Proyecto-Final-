@@ -7,4 +7,4 @@ ultimo paso es el 'git push origin' se deja un espacio y se pone la rama a la qu
 'form' es un formulario para enviarlos de un campo a otro
 'form.group' sirve para agrupar datos que van dentro de un mismo campo de texto
 'form.control' para que el usuario digite datos
-'alt + shif + f' sirve para acomodar la identacion del codigo
+'alt + shif + f' sirve para acomodar la identacion del codigo 
