@@ -34,6 +34,10 @@ function App() {
       multiplicacion: multiplicacionTemp,
       division: divisionTemp
     })
+    setValidacion({
+      validoNumero1: validarNumero(temporal.numero1),
+      validoNumero2: validarNumero(temporal.numero2),
+    })
   }
 
   return (

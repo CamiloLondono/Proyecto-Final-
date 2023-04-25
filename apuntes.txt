@@ -5,6 +5,192 @@ ultimo paso es el 'git push origin' se deja un espacio y se pone la rama a la qu
 'git pull' es para bajar los archivos a mi unidad local
 ------CLASE 4----------
 'form' es un formulario para enviarlos de un campo a otro
+'form.label' es un campo de texto que dice que valores deben de ir ahi andentro
 'form.group' sirve para agrupar datos que van dentro de un mismo campo de texto
 'form.control' para que el usuario digite datos
 'alt + shif + f' sirve para acomodar la identacion del codigo
+'git rm -r --cached .' este comando era para borrar la carpeta cache para poder subir los archivos
+'npm install' para instalar la carpeta de node modules
+'placeholder' dice que tipo de documento debe de ser ingresado y se borra apenas se digitan valores
+'onChange' es una de las funciones predeterminadas en React que nos permiten definir una acción a ejecutar cuando una situación (evento) ocurre
+------CLASE 5------------
+
+este es el formulario de los correos
+
+function App() {
+
+  const [formulario, setFormulario] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (event) => {
+    const temporal = {...formulario} //copia el objeto que esta dentro de las llaves, quitando referencia
+    temporal[event.target.name] = event.target.value 
+    setFormulario(temporal)
+  } //el target.name es como los get y set, y el .value sirve para cambiar el valor 
+
+  return (
+    <div className="App">
+      <Container>
+        <Form> 
+          <Form.Group className="mb-3" controlId="formBasicEmail"> 
+            <Form.Label>Direccion de correo electronico</Form.Label>
+            <Form.Control
+              onChange={handleChange}
+              name="email"
+              type="email"
+              placeholder="Introducir Email"
+            />
+            <Form.Text className="text-muted">
+            Nunca compartiremos su correo electrónico con nadie más.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              onChange={handleChange}
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group>
+            Submit
+          </Button>
+        </Form> 
+      </Container>
+    </div>
+  );
+}
+
+export default App;
+
+----CLASE 6------
+
+CODIGO MIO CON BOTON
+
+import "./App.scss";
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import { Container } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+function App() {
+  const [formulario, setFormulario] = useState({
+    numero1: "",
+    numero2: "",
+    suma: "",
+    resta: "",
+    multiplicacion: "",
+    division: "",
+  });
+
+  const handleChange = (event) => {
+    const temporal = { ...formulario }; //copia el objeto que esta dentro de las llaves, quitando referencia
+    temporal[event.target.name] = event.target.value;
+    setFormulario(temporal);
+  }; //el target.name es como los get y set, y el .value sirve para cambiar el valor
+  
+  const calcular = () => {
+    const num1 = parseFloat(formulario.numero1); //la funcion 'parseFloat' toma un texto ingresado y lo convierte en un numero flotante
+    const num2 = parseFloat(formulario.numero2);
+
+    const suma = num1 + num2;
+    const resta = num1 - num2;
+    const multiplicacion = num1 * num2;
+    const division = num2 !== 0 ? num1 / num2 : "No definido";
+
+    setFormulario({
+      ...formulario,
+      suma: suma.toString(), // el comando 'toString' hace que el valor que dio en las operaciones se vuelva una cadena de nuevo
+      resta: resta.toString(),
+      multiplicacion: multiplicacion.toString(),
+      division: division.toString(),
+    });
+  };
+
+  return (
+    <div className="App">
+      <Container>
+        <Form>
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Label>Ingrese el numero</Form.Label>
+                <Form.Control
+                  onChange={handleChange}
+                  name="numero1"
+                  type="input"
+                  placeholder="Introducir Numero 1"
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Ingrese el numero</Form.Label>
+                <Form.Control
+                  onChange={handleChange}
+                  name="numero2"
+                  type="input"
+                  placeholder="Introducir Numero 2"
+                />
+              </Form.Group>
+              <Form.Group>
+                <button type="button" onClick={calcular}>
+                  Calcular
+                </button>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>Resultado Suma</Form.Label>
+                <Form.Control
+                  value={formulario.suma}
+                  readOnly
+                  type="input"
+                  placeholder="Suma"
+                  disabled //comando disabled, es para desibilitar el campo de texto
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Resultado Resta</Form.Label>
+                <Form.Control
+                  value={formulario.resta}
+                  readOnly
+                  type="input"
+                  placeholder="Resta"
+                  disabled
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Resultado Multiplicacion</Form.Label>
+                <Form.Control
+                  value={formulario.multiplicacion}
+                  readOnly
+                  type="input"
+                  placeholder="Multiplicacion"
+                  disabled
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Resultado Division</Form.Label>
+                <Form.Control
+                  value={formulario.division}
+                  readOnly
+                  type="input"
+                  placeholder="Division"
+                  disabled
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+    </div>
+  );
+}
+
+export default App;
