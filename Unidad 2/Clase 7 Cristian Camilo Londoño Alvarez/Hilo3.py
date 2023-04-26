@@ -17,4 +17,4 @@ class Hilo3(threading.Thread):
         i = True
         while i != False:
             time.sleep(self.tiempo)
-            perro = logging.debug('Me estoy ejecutando de manera infinita')
+            perro = logging.debug('Me estoy ejecutando de manera infinita. \n')
