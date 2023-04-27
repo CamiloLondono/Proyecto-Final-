@@ -14,7 +14,6 @@ class Hilo3(threading.Thread):
         self.cicloInfinito(self.tiempo)
     
     def cicloInfinito(self,tiempo):
-        i = True
-        while i != False:
+        while True:
             time.sleep(self.tiempo)
             perro = logging.debug('Me estoy ejecutando de manera infinita. \n')
