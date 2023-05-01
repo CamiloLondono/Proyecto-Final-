@@ -18,23 +18,18 @@ t2.join()'''
 
 t1 = Hilo1('hilo_1', 1)
 t2 = Hilo2('hilo_2', 2, 'esta es la data')
-t3 = Hilo3('hilo_3', 3)
+t3 = Hilo3('hilo_3', 2, '')
+
 
 '''t1.start()
 t1.join()
 t2.start()
 t2.join()'''
-#t3.start()
+t3.start()
 
-variableVerificar = ''
 while True:
     variable = input('Por favor ingrese la variable a guardar: ')
-    if variable == variableVerificar:
-        logging.debug('La variable es la misma.\n')
-    else:
-        variableVerificar = variable
-        logging.debug('Se guardo la variable ' + variableVerificar +'\n')
-
+    t3.setVariable(variable)
 
 tiempo_final = datetime.datetime.now()
 print('Tiempo transcurrido '+ str(tiempo_final.second - tiempo_inicial.second))
