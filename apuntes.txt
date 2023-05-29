@@ -194,3 +194,6 @@ function App() {
 }
 
 export default App;
+
+---CLASE 11---
+el comando para crear un nuevo proyecto en reacjjs se usa 'npx create-react-app my-app'

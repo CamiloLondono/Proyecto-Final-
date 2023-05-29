@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from biblioteca.api.router import router_biblioteca
+from Peliculas.api.router import router_peliculas
 
 urlpatterns = [
     #path("polls/", include("polls.urls")),
     path('admin/', admin.site.urls),
-    path('api/', include(router_biblioteca.urls))
+    path('api/', include(router_biblioteca.urls)),
+    path('api2/', include(router_peliculas.urls))
 ]
