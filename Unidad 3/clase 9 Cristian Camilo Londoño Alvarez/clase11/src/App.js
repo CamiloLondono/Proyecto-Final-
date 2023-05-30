@@ -7,9 +7,9 @@ import {hacerPeticion} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
-    Titulo: '',
-    Genero: '',
-    Actores: '',
+    titulo: '',
+    genero: '',
+    actores: '',
   });
 
   const handleChange = (event) => {
@@ -31,7 +31,7 @@ function App() {
               <Form.Label>Titulo Pelicula</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Titulo"
+                name="titulo"
                 placeholder="Ingrese el nombre de la pelicula"
               />
             </Form.Group>
@@ -39,7 +39,7 @@ function App() {
               <Form.Label>Genero</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Genero"
+                name="genero"
                 placeholder="Ingrese el genero de la pelicula"
               />
             </Form.Group>
@@ -47,13 +47,10 @@ function App() {
               <Form.Label>Actores</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Actores"
+                name="actores"
                 placeholder="ingrese el actor principal"
               />
-            </Form.Group>
-            {formulario.Titulo}
-            {formulario.Genero}
-            {formulario.Actores}            
+            </Form.Group>          
             <Button onClick={guardarPelicula}>
               Guardar Pelicula
             </Button>

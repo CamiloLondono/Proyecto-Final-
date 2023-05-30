@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from biblioteca.api.router import router_biblioteca
-from Peliculas.api.router import router_peliculas
+from peliculas.api.router import router_peliculas
 
 urlpatterns = [
     #path("polls/", include("polls.urls")),

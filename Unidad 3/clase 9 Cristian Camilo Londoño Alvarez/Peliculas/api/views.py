@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from Peliculas.api.serializer import PeliculasSerializer
-from Peliculas.models import Peliculas
+from peliculas.api.serializer import PeliculasSerializer
+from peliculas.models import Peliculas
 
 
 class PeliculasApiSet(ModelViewSet):

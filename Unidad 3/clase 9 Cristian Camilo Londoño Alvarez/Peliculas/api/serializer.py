@@ -1,8 +1,8 @@
 from rest_framework.serializers import ModelSerializer
-from Peliculas.models import Peliculas
+from peliculas.models import Peliculas
 
 class PeliculasSerializer(ModelSerializer):
 
     class Meta:
-        model = Peliculas()
-        fields = ['id', 'Titulo', 'Genero', 'Actores']
+        model = Peliculas
+        fields = ['id', 'titulo', 'genero', 'actores']
