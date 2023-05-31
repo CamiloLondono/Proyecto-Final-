@@ -7,9 +7,9 @@ import {hacerPeticion} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
-    titulo: '',
-    genero: '',
-    actores: '',
+    diseño: '',
+    color: '',
+    talla: '',
   });
 
   const informacion = [
@@ -27,7 +27,7 @@ function App() {
     setFormulario(temporal);
   };
 
-  const guardarPelicula = () => {
+  const guardarRopa = () => {
     hacerPeticion(formulario)
   }
 
@@ -35,33 +35,33 @@ function App() {
     <div className="App">
       <Container>
         <Form>
-          <Form.Text >Formulario guardar pelicula</Form.Text>
+          <Form.Text >Formulario pedir ropa</Form.Text>
             <Form.Group className="mb-3">
-              <Form.Label>Titulo Pelicula</Form.Label>
+              <Form.Label>Diseño Ropa</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="titulo"
-                placeholder="Ingrese el nombre de la pelicula"
+                name="diseño"
+                placeholder="Ingrese el nombre del diseño de la ropa"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Genero</Form.Label>
+              <Form.Label>Color</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="genero"
-                placeholder="Ingrese el genero de la pelicula"
+                name="color"
+                placeholder="Ingrese el color de la prenda"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Actores</Form.Label>
+              <Form.Label>Talla</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="actores"
-                placeholder="ingrese el actor principal"
+                name="talla"
+                placeholder="ingrese la talla"
               />
             </Form.Group>          
-            <Button onClick={guardarPelicula}>
-              Guardar Pelicula
+            <Button onClick={guardarRopa}>
+              Guardar Pedido
             </Button>
         </Form>
         {
