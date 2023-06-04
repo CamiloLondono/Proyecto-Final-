@@ -12,7 +12,7 @@ export const crearConfiguracion = (metodo, url, informacion) => {
 
 export const hacerPeticion = async (informacion) => {
     try {
-        const configuracion = crearConfiguracion("post" , "guardarPeliculas/", informacion)
+        const configuracion = crearConfiguracion("post" , "peliculas/", informacion)
         const respuesta =await axios(configuracion)
         if(respuesta.status === 201){
             console.log(respuesta)

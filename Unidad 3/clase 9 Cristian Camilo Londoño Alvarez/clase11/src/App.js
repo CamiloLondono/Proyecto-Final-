@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import {hacerPeticion} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
-    Titulo: '',
-    Genero: '',
-    Actores: '',
+    titulo: '',
+    genero: '',
+    actores: '',
   });
+
+  const informacion = [
+    {
+      'titulo': 'el irlandes herrante'
+    }, 
+    {  
+      'titulo': 'el barco volador'
+    }
+  ]
 
   const handleChange = (event) => {
     const temporal = { ...formulario };
@@ -31,7 +40,7 @@ function App() {
               <Form.Label>Titulo Pelicula</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Titulo"
+                name="titulo"
                 placeholder="Ingrese el nombre de la pelicula"
               />
             </Form.Group>
@@ -39,7 +48,7 @@ function App() {
               <Form.Label>Genero</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Genero"
+                name="genero"
                 placeholder="Ingrese el genero de la pelicula"
               />
             </Form.Group>
@@ -47,17 +56,26 @@ function App() {
               <Form.Label>Actores</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Actores"
+                name="actores"
                 placeholder="ingrese el actor principal"
               />
-            </Form.Group>
-            {formulario.Titulo}
-            {formulario.Genero}
-            {formulario.Actores}            
+            </Form.Group>          
             <Button onClick={guardarPelicula}>
               Guardar Pelicula
             </Button>
         </Form>
+        {
+          informacion.map((elemento) => {
+          return <Row>
+              <Col>
+                titulo
+              </Col>
+              <Col>
+                {elemento.titulo}
+              </Col>
+            </Row>
+          })
+        }
       </Container>
     </div>
   );
