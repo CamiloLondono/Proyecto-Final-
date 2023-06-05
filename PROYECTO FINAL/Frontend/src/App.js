@@ -1,59 +1,126 @@
-import "./App.scss";
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import { Button, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-//import Row from "react-bootstrap/Row";
-//import Col from "react-bootstrap/Col";
+import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
+
 
 function App() {
-
   const [formulario, setFormulario] = useState({
-    email: "",
-    password: ""
+    titulo: '',
+    genero: '',
+    actores: '',
   });
 
   const handleChange = (event) => {
-    const temporal = {...formulario} //copia el objeto que esta dentro de las llaves, quitando referencia
-    temporal[event.target.name] = event.target.value 
-    setFormulario(temporal)
-  } //el target.name es como los get y set, y el .value sirve para cambiar el valor 
+    const temporal = { ...formulario };
+    temporal[event.target.name] = event.target.value;
+    setFormulario(temporal);
+  };
 
   return (
     <div className="App">
       <Container>
-        <Form> 
-          <Form.Group className="mb-3"> 
-            <Form.Label>Nombre Pelicula</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="Pelicula"
-              placeholder="Introducir Nombre Pelicula"
-            />
-            <Form.Text className="text-muted">
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Actores</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="Actores"
-              placeholder="Introducir Actor Principal"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Genero Pelicula</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              name="Genero"
-              placeholder="Introducir Genero"
-            />
-          </Form.Group>
-          <Button>
-            Enviar
-          </Button>
-        </Form> 
-      </Container>
+        <Form>
+          <Row>
+              <Col>
+              <Form.Text ></Form.Text>
+                <Form.Group className="mb-3">
+                  <Form.Label>Usuarios</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    name="Usuarios"
+                  />
+                </Form.Group>
+                <Button>
+                  Cerrar Sesion
+                </Button>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label>Chats</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    name="Chats"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Mensajes Enviados</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    name="Mensajes"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Mensaje a Enviar</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    name="Mensaje a Enviar"
+                    placeholder='Escribe el mensaje que deseas enviar'
+                  />
+                </Form.Group>
+                <FormGroup>
+                  <Button>
+                    Enviar
+                  </Button>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup className='mb-3'>
+                  <FormLabel>Registrarse</FormLabel>
+                </FormGroup>
+                <FormGroup className='mb-3'>
+                  <FormControl
+                    name="nombre"
+                    placeholder="Nombre"
+                  />
+                </FormGroup>                
+                <FormGroup className='mb-3'>
+                  <FormControl
+                    name="apellido"
+                    placeholder="apellido"
+                  />
+                </FormGroup>
+                <FormGroup className='mb-3'>
+                  <FormControl
+                    name="usuario"
+                    placeholder="Usuario"
+                  />
+                </FormGroup>
+                <FormGroup className='mb-3'>
+                  <FormControl
+                    name="contraseña"
+                    placeholder="contraseña"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Button>
+                    Registrarse
+                  </Button>
+                </FormGroup>
+                <FormGroup className='mb-3'>
+                  <FormLabel>Login</FormLabel>
+                </FormGroup>
+                <FormGroup className='mb-3'>
+                  <FormControl
+                    name="usuario"
+                    placeholder="Ingrese su Usuario"
+                  />
+                </FormGroup>                
+                <FormGroup className='mb-3'>
+                  <FormControl
+                    name="contraseña"
+                    placeholder="Ingrese su contraseña"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Button>
+                    Iniciar Sesion
+                  </Button>
+                </FormGroup>
+              </Col>
+            </Row>      
+          </Form>
+        </Container>
     </div>
   );
 }
