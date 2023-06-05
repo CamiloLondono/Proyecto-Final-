@@ -6,10 +6,17 @@ import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row } from '
 
 function App() {
   const [formulario, setFormulario] = useState({
-    titulo: '',
-    genero: '',
-    actores: '',
+    Usuarios: '',
+    Chats: '',
+    Mensajes: '',
+    mensajeEnviar: '',
+    nombre: '',
+    apellido: '',
+    usuario: '',
+    contraseña: '',
   });
+
+  const [mensajesEnviados, setMensajesEnviados] = useState([]);
 
   const [sesionIniciada, setSesionIniciada] = useState(false);
 
@@ -21,10 +28,8 @@ function App() {
 
   const handleRegistro = () => {
     const { nombre, apellido, usuario, contraseña } = formulario;
-
     // Aquí puedes implementar la lógica para registrar el usuario
     // ...
-
     // Almacenar el usuario registrado en el localStorage
     const usuarioRegistrado = {
       nombre,
@@ -33,17 +38,14 @@ function App() {
       contraseña
     };
     localStorage.setItem('usuario', JSON.stringify(usuarioRegistrado));
-
     // Mostrar mensaje de éxito o redirigir a otra página
     alert('Registro exitoso');
   };
 
   const handleInicioSesion = () => {
     const { usuario, contraseña } = formulario;
-
     // Verificar las credenciales del usuario registrado
     const usuarioAlmacenado = JSON.parse(localStorage.getItem('usuario'));
-
     if (usuario === usuarioAlmacenado.usuario && contraseña === usuarioAlmacenado.contraseña) {
       // Credenciales válidas, iniciar sesión
       setSesionIniciada(true);
@@ -54,10 +56,23 @@ function App() {
     }
   };
 
+  const handleEnviarMensaje = () => {
+    const mensaje = `${formulario.usuarioSeleccionado}: ${formulario.mensajeEnviar}`;
+  // Añade el mensaje a la lista de mensajes enviados
+  setMensajesEnviados([...mensajesEnviados, mensaje]);
+  // Limpia el campo de texto de "Mensaje a Enviar"
+  setFormulario({ ...formulario, mensajeEnviar: '' });
+  };
+
   const handleCerrarSesion = () => {
     // Cerrar sesión y establecer la variable de estado como false
     setSesionIniciada(false);
     alert('Sesión cerrada');
+  };
+
+  const handleLimpiarMensajes = () => {
+    // Limpiar la lista de mensajes enviados
+    setMensajesEnviados([]);
   };
 
   return (
@@ -69,9 +84,10 @@ function App() {
               <Form.Text ></Form.Text>
                 <Form.Group className="mb-3">
                   <Form.Label>Usuarios</Form.Label>
-                  <Form.Control
-                    onChange={handleChange}
-                    name="Usuarios"
+                  <FormControl
+                    as="select" 
+                    onChange={handleChange} 
+                    name="usuarioSeleccionado"
                   />
                 </Form.Group>
                 {/* ... */}
@@ -85,32 +101,36 @@ function App() {
               <Col>
                 <Form.Group className="mb-3">
                   <Form.Label>Chats</Form.Label>
-                  <Form.Control
-                    onChange={handleChange}
-                    name="Chats"
-                  />
                 </Form.Group>
                 {/* ... */}
                 <Form.Group className="mb-3">
                   <Form.Label>Mensajes Enviados</Form.Label>
                   <Form.Control
-                    onChange={handleChange}
-                    name="Mensajes"
+                    as="textarea"
+                    rows={5}
+                    value={mensajesEnviados.join('\n')}
+                    disabled
                   />
                 </Form.Group>
                 {/* ... */}
                 <Form.Group className="mb-3">
                   <Form.Label>Mensaje a Enviar</Form.Label>
                   <Form.Control
+                    name="mensajeEnviar"
+                    value={formulario.mensajeEnviar}
                     onChange={handleChange}
-                    name="Mensaje a Enviar"
                     placeholder='Escribe el mensaje que deseas enviar'
+                    disabled={!sesionIniciada}
                   />
                 </Form.Group>
                 {/* ... */}
                 <FormGroup>
-                  <Button>
+                  <Button onClick={handleEnviarMensaje} disabled={!sesionIniciada}>
                     Enviar
+                  </Button>
+                  {/* ... */}
+                  <Button onClick={handleLimpiarMensajes} disabled={!sesionIniciada}>
+                    Limpiar
                   </Button>
                 </FormGroup>
               </Col>
