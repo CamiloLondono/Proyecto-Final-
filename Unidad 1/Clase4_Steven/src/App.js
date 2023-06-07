@@ -12,10 +12,36 @@ function App() {
     numero2:""
   });
 
+  const [resultado, setResultado] = useState({
+    suma: 0,
+    resta:0,
+    multiplicacion:0,
+    division:0
+  });
+
+  const [validacion, setValidacion] = useState({
+    suma: 0,
+    resta:0,
+    multiplicacion:0,
+    division:0
+  });
+
   const handleChange = (event) => {
     const temporal = {...formulario}
     temporal[event.target.name]=event.target.value
     setFormulario(temporal)
+    const sumaTemp = parseFloat(temporal.numero1) + parseFloat(temporal.numero2)
+    const restaTemp = parseFloat(temporal.numero1) - parseFloat(temporal.numero2)
+    const multiTemp = parseFloat(temporal.numero1) * parseFloat(temporal.numero2)
+    const diviTemp = parseFloat(temporal.numero1) / parseFloat(temporal.numero2)
+    console.log(temporal)
+    console.log(sumaTemp)
+    setResultado({
+     suma: sumaTemp,
+     resta: restaTemp,
+     multiplicacion: multiTemp,
+     division: diviTemp
+    })
   }
   return (
     <div className="App">
@@ -25,12 +51,12 @@ function App() {
             <Form>
               <Form.Group  controlId="formBasicEmail">
                 <Form.Label>Número 1</Form.Label>
-                <Form.Control onChange={handleChange} name="Número 1" type="input" placeholder="Digite su primer número" />
+                <Form.Control onChange={handleChange} name="numero1" type="input" placeholder="Digite su primer número" />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Número 2</Form.Label>
-                <Form.Control  onChange={handleChange} name="Número 2" type="input" placeholder="Digite su segundo número" />
+                <Form.Control  onChange={handleChange} name="numero2" type="input" placeholder="Digite su segundo número" />
               </Form.Group>
             </Form>
           </Col>
@@ -40,29 +66,43 @@ function App() {
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Resultado suma</Form.Label>
-                <Form.Control onChange={handleChange} name="suma" type="input"/>
+                <Form.Control onChange={handleChange}
+                value={resultado.suma}
+                type="input"
+                placecholder="Suma"
+                disabled/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Resultado resta</Form.Label>
-                <Form.Control onChange={handleChange} name="resta" type="input"/>
+                <Form.Control onChange={handleChange}
+                value={resultado.resta}
+                type="input"
+                placecholder="Resta"
+                disabled/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Resultado multiplicación</Form.Label>
-                <Form.Control onChange={handleChange} name="multiplicacion" type="input"/>
+                <Form.Control onChange={handleChange}
+                  value={resultado.multiplicacion}
+                  type="input"
+                  placecholder="Multiplicación"
+                  disabled/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Resultado división</Form.Label>
-                <Form.Control onChange={handleChange} name="division" type="input"/>
+                <Form.Control onChange={handleChange}
+                value={resultado.division}
+                type="input"
+                placecholder="División"
+                disabled/>
               </Form.Group>
 
             </Form>
           </Col>
         </Row>
-        {formulario.numero1}
-        {formulario.numero2}
       </Container>
     </div> 
 

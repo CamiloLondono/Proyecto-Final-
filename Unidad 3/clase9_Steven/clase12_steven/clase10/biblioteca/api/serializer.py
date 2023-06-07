@@ -5,4 +5,4 @@ class BibliotecaSerializer(ModelSerializer):
 
     class Meta:
         model = Biblioteca
-        fields = ['id', 'titulo', 'resumen']
+        fields = ['id', 'titulo', 'resumen', 'autor']

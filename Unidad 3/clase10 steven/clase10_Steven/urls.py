@@ -16,12 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from biblioteca.api.router import router_biblioteca
-from cine.api.router import router_cine
 
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('api/', include(router_biblioteca.urls)),
-    path('api/', include(router_cine.urls))
 ]
