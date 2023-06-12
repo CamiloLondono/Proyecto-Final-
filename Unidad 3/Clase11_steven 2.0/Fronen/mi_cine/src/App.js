@@ -14,10 +14,10 @@ function App() {
 
   const informacion = [
     {
-      'titulo': 'el irlandes herrante'
+      'titulo': '...'
     }, 
     {  
-      'titulo': 'el barco volador'
+      'titulo': '...'
     }
   ]
 
