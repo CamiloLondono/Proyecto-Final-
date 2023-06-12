@@ -9,7 +9,7 @@ function App() {
   const [formulario, setFormulario] = useState({
     sala: '',
     fila: '',
-    asientos: '',
+    asiento: '',
   });
 
   const informacion = [
@@ -40,7 +40,7 @@ function App() {
               <Form.Label>Sala</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Sala"
+                name="sala"
                 placeholder="Ingrese el número de la sala"
               />
             </Form.Group>
@@ -56,7 +56,7 @@ function App() {
               <Form.Label>#Asiento</Form.Label>
               <Form.Control
                 onChange={handleChange}
-                name="Número de asiento"
+                name="asiento"
                 placeholder="ingrese el número de asiento"
               />
             </Form.Group>          

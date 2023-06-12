@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "http://localhost:8000/api2/";
+const baseurl = "http://localhost:8000/api/";
 
 export const crearConfiguracion = (metodo, url, informacion) => {
     return {
