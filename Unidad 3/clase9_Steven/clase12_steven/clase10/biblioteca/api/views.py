@@ -7,10 +7,11 @@ class BibliotecaApiSet(ModelViewSet):
     def get_queryset(self):
         queryset = Biblioteca.objects.all()
         titulo = self.request.query_params.get('titulo')
+        autor = self.request.query_params.get('autor')
         if titulo is not None:
             queryset =queryset.filter(titulo=titulo)
-        return queryset
-    
         if autor is not None:
             queryset =queryset.filter(autor=autor)
         return queryset
+    
+        
