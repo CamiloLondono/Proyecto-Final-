@@ -3,12 +3,20 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
-import {hacerPeticion} from './servicios/clienteaxios.js';
+import {hacerPeticion, traerTodo, traerLaSala, traerSalaYAsiento} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
     sala: '',
     fila: '',
+    asiento: '',
+  });
+
+  const [sala, setSala] = useState({
+    sala: ''
+  });
+
+  const [asiento, setAsiento] = useState({
     asiento: '',
   });
 
@@ -26,9 +34,37 @@ function App() {
     temporal[event.target.name] = event.target.value;
     setFormulario(temporal);
   };
+  
+  const handleChangeBuscaSala = (event) => {
+    const temporal = { ...sala };
+    temporal[event.target.name] = event.target.value;
+    setSala(temporal);
+  };
+  
+  const handleChangeBuscaAsiento = (event) => {
+    const temporal = { ...asiento };
+    temporal[event.target.name] = event.target.value;
+    setAsiento(temporal);
+  };
 
-  const reserva_asiento = () => {
-    hacerPeticion(formulario)
+  const reserva_asiento = async () => {
+    await hacerPeticion(formulario)
+    traerTodo()
+  }
+
+  const traerTodo =  async() => {
+    const temporal = await traerTodosLosLibros()
+    setInformacion(temporal)
+  }
+  
+  const traerSala =  async() => {
+    const temporal = await traerTodosLosLibros()
+    setSala(temporal)
+  }
+  
+  const traerAsiento =  async() => {
+    const temporal = await traerTodosLosLibros()
+    setAsiento(temporal)
   }
 
   return (
