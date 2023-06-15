@@ -20,14 +20,14 @@ function App() {
     asiento: '',
   });
 
-  const informacion = [
+  const [informacion, setInformacion] = useState([
     {
       'titulo': '...'
     }, 
     {  
       'titulo': '...'
     }
-  ]
+  ])
 
   const handleChange = (event) => {
     const temporal = { ...formulario };
@@ -49,22 +49,22 @@ function App() {
 
   const reserva_asiento = async () => {
     await hacerPeticion(formulario)
-    traerTodo()
+    traeTodo()
   }
 
-  const traerTodo =  async() => {
-    const temporal = await traerTodosLosLibros()
+  const traeTodo =  async() => {
+    const temporal = await traerTodo()
     setInformacion(temporal)
   }
   
   const traerSala =  async() => {
-    const temporal = await traerTodosLosLibros()
-    setSala(temporal)
+    const temporal = await traerLaSala()
+    setInformacion(temporal)
   }
   
   const traerAsiento =  async() => {
-    const temporal = await traerTodosLosLibros()
-    setAsiento(temporal)
+    const temporal = await traerSalaYAsiento
+    setInformacion(temporal)
   }
 
   return (
@@ -112,6 +112,39 @@ function App() {
             </Row>
           })
         }
+
+        <Button onClick={traeTodo}>
+            traer todos
+        </Button>
+
+        <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Sala</Form.Label>
+              <Form.Control
+                onChange={handleChangeBuscaSala}
+                name="sala"
+                placeholder="Ingrese la sala"
+              />
+          </Form.Group>
+        </Form>
+        <Button onClick={traerSala}>
+              Buscar la sala
+            </Button>
+            
+        <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Asiento</Form.Label>
+              <Form.Control
+                onChange={handleChangeBuscaAsiento}
+                name="asiento"
+                placeholder="Ingrese asiento"
+              />
+          </Form.Group>
+        </Form>
+        <Button onClick={traerAsiento}>
+              Buscar el Asiento
+            </Button>
+
       </Container>
     </div>
   );
