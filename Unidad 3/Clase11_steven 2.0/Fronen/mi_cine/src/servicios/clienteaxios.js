@@ -31,7 +31,7 @@ export const hacerPeticion = async (informacion) => {
     }
 };
 
-export const traerTodo = async (informacion) => {
+export const traerTodo = async () => {
   try {
     const configuracion = crearConfiguracionSinInformacion("get", "cine/");
     const respuesta = await axios(configuracion);

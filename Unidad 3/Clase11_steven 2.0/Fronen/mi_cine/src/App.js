@@ -58,12 +58,12 @@ function App() {
   }
   
   const traerSala =  async() => {
-    const temporal = await traerLaSala()
+    const temporal = await traerLaSala(sala.sala)
     setInformacion(temporal)
   }
   
   const traerAsiento =  async() => {
-    const temporal = await traerSalaYAsiento
+    const temporal = await traerSalaYAsiento(sala.sala , asiento.asiento)
     setInformacion(temporal)
   }
 
@@ -104,10 +104,13 @@ function App() {
           informacion.map((elemento) => {
           return <Row>
               <Col>
-                titulo
+                {elemento.sala}
               </Col>
               <Col>
-                {elemento.titulo}
+                {elemento.fila}
+              </Col>
+              <Col>
+                {elemento.asiento}
               </Col>
             </Row>
           })
