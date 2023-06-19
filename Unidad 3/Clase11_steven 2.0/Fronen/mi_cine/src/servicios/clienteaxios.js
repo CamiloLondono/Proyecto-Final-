@@ -21,7 +21,6 @@ export const crearConfiguracionSinInformacion = (method, url) => {
 export const hacerPeticion = async (informacion) => {
     try {
         const configuracion = crearConfiguracion("post" , "cine/", informacion)
-        console.log(informacion)
         const respuesta =await axios(configuracion);
         if(respuesta.status === 201){
             console.log(respuesta);

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
-import {hacerPeticion} from './servicios/clienteaxios.js';
+import {hacerPeticion, traerTodo, traerTitulo, traerGenero} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
@@ -12,14 +12,22 @@ function App() {
     actores: '',
   });
 
-  const informacion = [
+  const [titulo, setTitulo] = useState({
+    titulo: ''
+  });
+
+  const [genero, setGenero] = useState({
+    genero: '',
+  });
+
+  const [informacion, setInformacion] = useState([
     {
-      'titulo': 'el irlandes herrante'
+      'titulo': '...'
     }, 
     {  
-      'titulo': 'el barco volador'
+      'titulo': '...'
     }
-  ]
+  ])
 
   const handleChange = (event) => {
     const temporal = { ...formulario };
@@ -27,8 +35,36 @@ function App() {
     setFormulario(temporal);
   };
 
-  const guardarPelicula = () => {
-    hacerPeticion(formulario)
+  const handleChangeBuscaTitulo = (event) => {
+    const temporal = { ...titulo };
+    temporal[event.target.name] = event.target.value;
+    setTitulo(temporal);
+  };
+
+  const handleChangeBuscaGenero = (event) => {
+    const temporal = { ...genero };
+    temporal[event.target.name] = event.target.value;
+    setGenero(temporal);
+  };
+
+  const guardar_pelicula = async () => {
+    await hacerPeticion(formulario)
+    traeTodo()
+  }
+
+  const traeTodo =  async() => {
+    const temporal = await traerTodo()
+    setInformacion(temporal)
+  }
+
+  const traerTitulo =  async() => {
+    const temporal = await traerTitulo()
+    setInformacion(temporal)
+  }
+
+  const traerGenero =  async() => {
+    const temporal = await traerGenero
+    setInformacion(temporal)
   }
 
   return (
@@ -59,8 +95,8 @@ function App() {
                 name="actores"
                 placeholder="ingrese el actor principal"
               />
-            </Form.Group>          
-            <Button onClick={guardarPelicula}>
+            </Form.Group>
+            <Button onClick={guardar_pelicula}>
               Guardar Pelicula
             </Button>
         </Form>
@@ -76,6 +112,35 @@ function App() {
             </Row>
           })
         }
+        <Button onClick={traeTodo}>
+            traer todos
+        </Button>
+        <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Titulo</Form.Label>
+              <Form.Control
+                onChange={handleChangeBuscaTitulo}
+                name="titulo"
+                placeholder="Ingrese el titulo de la pelicula"
+              />
+          </Form.Group>
+        </Form>
+        <Button onClick={traerTitulo}>
+          Buscar Titulo
+        </Button>
+        <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Genero</Form.Label>
+              <Form.Control
+                onChange={handleChangeBuscaGenero}
+                name="genero"
+                placeholder="Ingrese el genero de la pelicula"
+              />
+          </Form.Group>
+        </Form>
+        <Button onClick={traerGenero}>
+          Buscar el Genero
+        </Button>
       </Container>
     </div>
   );
