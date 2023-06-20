@@ -58,12 +58,12 @@ function App() {
   }
 
   const traerTitulo =  async() => {
-    const temporal = await traerTitulo()
+    const temporal = await traerTitulo(titulo.titulo)
     setInformacion(temporal)
   }
 
   const traerGenero =  async() => {
-    const temporal = await traerGenero
+    const temporal = await traerGenero(titulo.titulo, genero.genero)
     setInformacion(temporal)
   }
 
@@ -104,10 +104,13 @@ function App() {
           informacion.map((elemento) => {
           return <Row>
               <Col>
-                titulo
+                {elemento.titulo}
               </Col>
               <Col>
-                {elemento.titulo}
+                {elemento.genero}
+              </Col>
+              <Col>
+                {elemento.actores}
               </Col>
             </Row>
           })
