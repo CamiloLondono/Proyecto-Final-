@@ -57,12 +57,12 @@ function App() {
     setInformacion(temporal)
   }
 
-  const traerTitulo =  async() => {
+  const traerTitulo2 =  async() => {
     const temporal = await traerTitulo(titulo.titulo)
     setInformacion(temporal)
   }
 
-  const traerGenero =  async() => {
+  const traerGenero2 =  async() => {
     const temporal = await traerGenero(titulo.titulo, genero.genero)
     setInformacion(temporal)
   }
@@ -128,7 +128,7 @@ function App() {
               />
           </Form.Group>
         </Form>
-        <Button onClick={traerTitulo}>
+        <Button onClick={traerTitulo2}>
           Buscar Titulo
         </Button>
         <Form>
@@ -141,7 +141,7 @@ function App() {
               />
           </Form.Group>
         </Form>
-        <Button onClick={traerGenero}>
+        <Button onClick={traerGenero2}>
           Buscar el Genero
         </Button>
       </Container>

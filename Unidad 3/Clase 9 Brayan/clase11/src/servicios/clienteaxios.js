@@ -31,17 +31,17 @@ export const hacerPeticion = async (informacion) => {
     }
 };
 
-export const traerTodo = async () => {
-    try {
-      const configuracion = crearConfiguracionSinInformacion("get", "ropa/");
-      const respuesta = await axios(configuracion);
-      if (respuesta.status === 200) {
-        console.log(respuesta.data);
-      }
-      return respuesta.data;
-    } catch (error) {
-      console.log(error);
+export const traerTodo = async (informacion) => {
+  try {
+    const configuracion = crearConfiguracionSinInformacion("get", "ropa/");
+    const respuesta = await axios(configuracion);
+    if (respuesta.status === 200) {
+      console.log(respuesta.data);
     }
+    return respuesta.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const traerDiseño = async (diseño) => {

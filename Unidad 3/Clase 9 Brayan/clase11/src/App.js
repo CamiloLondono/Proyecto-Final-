@@ -52,17 +52,17 @@ function App() {
     traerTodo()
   }
 
-  const traerTodo =  async() => {
+  const traeTodo =  async() => {
     const temporal = await traerTodo()
     setInformacion(temporal)
   }
 
-  const traerDiseño =  async() => {
+  const traerDiseño2 =  async() => {
     const temporal = await traerDiseño(diseño.diseño)
     setInformacion(temporal)
   }
 
-  const traerColor =  async() => {
+  const traerColor2 =  async() => {
     const temporal = await traerColor(diseño.diseño, color.color)
     setInformacion(temporal)
   }
@@ -104,18 +104,18 @@ function App() {
           informacion.map((elemento) => {
           return <Row>
               <Col>
-                {elemento.titulo}
+                {elemento.diseño}
               </Col>
               <Col>
-                {elemento.genero}
+                {elemento.color}
               </Col>
               <Col>
-                {elemento.actores}
+                {elemento.talla}
               </Col>
             </Row>
           })
         }
-        <Button onClick={traerTodo}>
+        <Button onClick={traeTodo}>
             traer todos
         </Button>
         <Form>
@@ -128,7 +128,7 @@ function App() {
               />
           </Form.Group>
         </Form>
-        <Button onClick={traerDiseño}>
+        <Button onClick={traerDiseño2}>
           Buscar Diseño
         </Button>
         <Form>
@@ -141,7 +141,7 @@ function App() {
               />
           </Form.Group>
         </Form>
-        <Button onClick={traerColor}>
+        <Button onClick={traerColor2}>
           Buscar el Color
         </Button>
       </Container>
