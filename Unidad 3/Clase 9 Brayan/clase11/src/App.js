@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
-import {hacerPeticion} from './servicios/clienteaxios.js';
+import {hacerPeticion, traerTodo, traerDiseño, traerColor} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
@@ -12,14 +12,22 @@ function App() {
     talla: '',
   });
 
-  const informacion = [
+  const [diseño, setDiseño] = useState({
+    diseño: ''
+  });
+
+  const [color, setColor] = useState({
+    color: '',
+  });
+
+  const [informacion, setInformacion] = useState([
     {
-      'titulo': 'el irlandes herrante'
+      'titulo': '...'
     }, 
     {  
-      'titulo': 'el barco volador'
+      'titulo': '...'
     }
-  ]
+  ])
 
   const handleChange = (event) => {
     const temporal = { ...formulario };
@@ -27,8 +35,36 @@ function App() {
     setFormulario(temporal);
   };
 
-  const guardarRopa = () => {
-    hacerPeticion(formulario)
+  const handleChangeBuscaDiseño = (event) => {
+    const temporal = { ...diseño };
+    temporal[event.target.name] = event.target.value;
+    setDiseño(temporal);
+  };
+
+  const handleChangeBuscaColor = (event) => {
+    const temporal = { ...color };
+    temporal[event.target.name] = event.target.value;
+    setColor(temporal);
+  };
+
+  const guardarRopa = async () => {
+    await hacerPeticion(formulario)
+    traerTodo()
+  }
+
+  const traeTodo =  async() => {
+    const temporal = await traerTodo()
+    setInformacion(temporal)
+  }
+
+  const traerDiseño2 =  async() => {
+    const temporal = await traerDiseño(diseño.diseño)
+    setInformacion(temporal)
+  }
+
+  const traerColor2 =  async() => {
+    const temporal = await traerColor(diseño.diseño, color.color)
+    setInformacion(temporal)
   }
 
   return (
@@ -68,14 +104,46 @@ function App() {
           informacion.map((elemento) => {
           return <Row>
               <Col>
-                titulo
+                {elemento.diseño}
               </Col>
               <Col>
-                {elemento.titulo}
+                {elemento.color}
+              </Col>
+              <Col>
+                {elemento.talla}
               </Col>
             </Row>
           })
         }
+        <Button onClick={traeTodo}>
+            traer todos
+        </Button>
+        <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Diseño</Form.Label>
+              <Form.Control
+                onChange={handleChangeBuscaDiseño}
+                name="diseño"
+                placeholder="Ingrese el diseño de ropa"
+              />
+          </Form.Group>
+        </Form>
+        <Button onClick={traerDiseño2}>
+          Buscar Diseño
+        </Button>
+        <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Color</Form.Label>
+              <Form.Control
+                onChange={handleChangeBuscaColor}
+                name="color"
+                placeholder="Ingrese el color de ropa"
+              />
+          </Form.Group>
+        </Form>
+        <Button onClick={traerColor2}>
+          Buscar el Color
+        </Button>
       </Container>
     </div>
   );

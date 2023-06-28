@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
-
+import {hacerPeticion, iniciarSesion} from './servicios/clienteaxios.js';
 
 function App() {
   const [formulario, setFormulario] = useState({
@@ -12,13 +12,14 @@ function App() {
     mensajeEnviar: '',
     nombre: '',
     apellido: '',
-    usuario: '',
-    contraseña: '',
+    usuarios: '',
+    contrasena: '',
   });
 
   const [mensajesEnviados, setMensajesEnviados] = useState([]);
 
   const [sesionIniciada, setSesionIniciada] = useState(false);
+
 
   const handleChange = (event) => {
     const temporal = { ...formulario };
@@ -26,33 +27,53 @@ function App() {
     setFormulario(temporal);
   };
 
-  const handleRegistro = () => {
-    const { nombre, apellido, usuario, contraseña } = formulario;
-    // Aquí puedes implementar la lógica para registrar el usuario
-    // ...
-    // Almacenar el usuario registrado en el localStorage
+  const handleRegistro = async() => {
+    const { nombre, apellido, usuarios, contrasena } = formulario;
     const usuarioRegistrado = {
       nombre,
       apellido,
-      usuario,
-      contraseña
+      usuarios,
+      contrasena
     };
-    localStorage.setItem('usuario', JSON.stringify(usuarioRegistrado));
-    // Mostrar mensaje de éxito o redirigir a otra página
-    alert('Registro exitoso');
+    const respuesta = await hacerPeticion(usuarioRegistrado)
+    console.log(respuesta.data)
+    hacerPeticion(usuarioRegistrado)
+      .then(response => {
+        // Aquí puedes realizar acciones adicionales después de guardar el usuario
+        console.log(response.data);
+        alert('Registro exitoso');
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Error al registrar el usuario');
+      });
   };
 
-  const handleInicioSesion = () => {
+
+  const handleInicioSesion = async () => {
     const { usuario, contraseña } = formulario;
-    // Verificar las credenciales del usuario registrado
-    const usuarioAlmacenado = JSON.parse(localStorage.getItem('usuario'));
-    if (usuario === usuarioAlmacenado.usuario && contraseña === usuarioAlmacenado.contraseña) {
-      // Credenciales válidas, iniciar sesión
+
+    try {
+      const token = await iniciarSesion(usuario, contraseña);
+      // Realizar acciones adicionales después de iniciar sesión exitosamente
+      console.log('Inicio de sesión exitoso');
+      console.log('Token:', token);
+
+      // Restablecer los campos del formulario
+      setFormulario({
+        // ...resto de los campos del formulario
+        usuario: '',
+        contraseña: '',
+      });
+
+      // Actualizar el estado de sesión iniciada
       setSesionIniciada(true);
+
       alert('Inicio de sesión exitoso');
-    } else {
-      // Credenciales inválidas, mostrar mensaje de error
-      alert('Credenciales incorrectas');
+    } catch (error) {
+      // Manejar el error de inicio de sesión
+      console.error(error.message);
+      alert('Error al iniciar sesión');
     }
   };
 
@@ -160,17 +181,18 @@ function App() {
                 {/* ... */}
                 <FormGroup className='mb-3'>
                   <FormControl
-                    name="usuario"
+                    name="usuarios"
                     placeholder="Usuario"
                     onChange={handleChange}
                     disabled={sesionIniciada}
                   />
                 </FormGroup>
                 {/* ... */}
-                <FormGroup className='mb-3'>
+                <FormGroup className='mb-3' controlId="formBasicPassword">
                   <FormControl
-                    name="contraseña"
-                    placeholder="contraseña"
+                    name="contrasena"
+                    type="password"
+                    placeholder="Contraseña"
                     onChange={handleChange}
                     disabled={sesionIniciada}
                   />
@@ -188,16 +210,17 @@ function App() {
                 {/* ... */}
                 <FormGroup className='mb-3'>
                   <FormControl
-                    name="usuario"
+                    name="usuarios"
                     placeholder="Ingrese su Usuario"
                     onChange={handleChange}
                     disabled={sesionIniciada}
                   />
                 </FormGroup>
                 {/* ... */}
-                <FormGroup className='mb-3'>
+                <FormGroup className='mb-3' controlId="formBasicPassword">
                   <FormControl
-                    name="contraseña"
+                    name="contrasena"
+                    type="password"
                     placeholder="Ingrese su contraseña"
                     onChange={handleChange}
                     disabled={sesionIniciada}
