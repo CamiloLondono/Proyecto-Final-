@@ -67,40 +67,40 @@ function FormularioLogin(){
               </Form>
     
               < Row>
-              <Col>
-                <Button onClick={iniciarSesion}>
-                  Iniciar Sesion
-                </Button>
-              </Col>
-    
-              <Col>
-              {
-                sesion.usuario !=='' ?
-                <Link to='/Inicio'>
-                  <Button>
-                    Avanzar
+                <Col>
+                  <Button onClick={iniciarSesion}>
+                    Iniciar Sesion
                   </Button>
-                </Link>
-                : null
-              }
-              </Col>
+                </Col>
     
-              <Col>
-              {
-                sesion.usuario !=='' ?
-                  <Button onClick={cerrarSesion}>
-                    Cerrar Sesion
-                  </Button>
-                  : null
-              }
-              </Col>
+                <Col>
+                  {
+                    sesion.usuario !=='' ?
+                    <Link to='/Inicio'>
+                      <Button>
+                        Avanzar
+                      </Button>
+                    </Link>
+                    : null
+                  }
+                </Col>
     
-              <Col>
-                <Alert variant={mensajes.error ? 'danger' : 'primary' }>
-                  {mensajes.mensaje}
-                </Alert>
-              </Col>
-            </Row>
+                <Col>
+                  {
+                    sesion.usuario !=='' ?
+                      <Button onClick={cerrarSesion}>
+                       Cerrar Sesion
+                      </Button>
+                      : null
+                  }
+                </Col>
+    
+                <Col>
+                  <Alert variant={mensajes.error ? 'danger' : 'primary' }>
+                    {mensajes.mensaje}
+                  </Alert>
+                </Col>
+              </Row>
     
             </Col>
     

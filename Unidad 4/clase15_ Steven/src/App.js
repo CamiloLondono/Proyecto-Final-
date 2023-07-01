@@ -15,6 +15,12 @@ function App() {
           <Route index element = {<FormularioLogin/>} />
           <Route path = 'Inicio' element = {<Inicio/>} />
         </Route>
+
+        <Route path = 'Inicio'>
+
+          <Route path = 'Ventanita' element = {<Ventanita/>} />
+          
+        </Route>
       </Routes>
 
     </BrowserRouter>
