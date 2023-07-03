@@ -16,7 +16,7 @@ function Inicio(){
         const usuario = localStorage.getItem('usuario')
         if (!!usuario){
         setSesion({usuario: usuario})
-        setMensajes({mensaje: 'Bienvenido a la otra pagina' + usuario, error: false})
+        setMensajes({mensaje: 'Bienvenido a la otra pagina ' + usuario, error: false})
         }else{
           setSesion({usuario: ''})
           setMensajes({mensaje: 'No ha iniciado sesion' , error: true})
@@ -24,9 +24,10 @@ function Inicio(){
     }, [setMensajes, setSesion])
 
     const cerrarSesion = () => {
+        const usuario = localStorage.getItem('usuario')
         localStorage.removeItem('usuario')
         setSesion({usuario: ''})
-        setMensajes({mensaje: 'Hasta Luego' + usuario, error: false})
+        setMensajes({mensaje: 'Hasta Luego ' + usuario, error: false})
     }
 
     return (
@@ -44,6 +45,18 @@ function Inicio(){
                 : null
               }
             </Col>
+
+            <Col>
+                  {
+                    sesion.usuario !=='' ?
+                    <Link to='/Ventanita'>
+                      <Button>
+                        Avanzamas
+                      </Button>
+                    </Link>
+                    : null
+                  }
+                </Col>
     
               <Col>
                 <Alert variant={mensajes.error ? 'danger' : 'primary' }>

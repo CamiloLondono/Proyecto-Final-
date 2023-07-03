@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert,Col, Container, Row, Button } from 'react-bootstrap';
+import { Alert,Col, Container, Row, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function FormularioLogin(){
@@ -33,10 +33,12 @@ function FormularioLogin(){
 
     const iniciarSesion = () => {
         if (!!formulario.usuario && !!formulario.contraseña){
-        if(formulario.usuario == 'stevenco'){
+        if(formulario.usuario == 'stevenco' && formulario.contraseña == '123'){
             localStorage.setItem('usuario', formulario.usuario)
+            localStorage.setItem('contraseña', formulario.contraseña)
             setSesion({usuario: formulario.usuario})
-            setMensajes({mensaje: 'BIENVENIDO' + formulario.usuario, error: false})
+            setSesion({contraseña: formulario.contraseña})
+            setMensajes({mensaje: 'BIENVENIDO ' + formulario.usuario, error: false})
         }else{
             setMensajes({mensaje: 'Usuario o Contraseña INCORRECTOS', error: true})
         }
@@ -46,9 +48,10 @@ function FormularioLogin(){
     };
 
     const cerrarSesion = () => {
+        const usuario = localStorage.getItem('usuario')
         localStorage.removeItem('usuario')
         setSesion({usuario: ''})
-        setMensajes({mensaje: 'Hasta Luego' + usuario, error: false})
+        setMensajes({mensaje: 'Hasta Luego ' + usuario, error: false})
     }
 
     return (

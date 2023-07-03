@@ -16,7 +16,7 @@ function Ventanita(){
         const usuario = localStorage.getItem('usuario')
         if (!!usuario){
         setSesion({usuario: usuario})
-        setMensajes({mensaje: 'Esta es la tarea' + usuario, error: false})
+        setMensajes({mensaje: 'Esta es la tarea ' + usuario, error: false})
         }else{
           setSesion({usuario: ''})
           setMensajes({mensaje: 'Aún ha iniciado sesion' , error: true})
@@ -24,9 +24,10 @@ function Ventanita(){
     }, [setMensajes, setSesion])
 
     const cerrarSesion = () => {
+        const usuario = localStorage.getItem('usuario')
         localStorage.removeItem('usuario')
         setSesion({usuario: ''})
-        setMensajes({mensaje: 'Hasta Luego' + usuario, error: false})
+        setMensajes({mensaje: 'Hasta Luego ' + usuario, error: false})
     }
 
     return (
@@ -46,17 +47,7 @@ function Ventanita(){
                 </Col>
 
                     
-                <Col>
-                  {
-                    sesion.usuario !=='' ?
-                    <Link to='/Ventanita'>
-                      <Button>
-                        Avanzamas
-                      </Button>
-                    </Link>
-                    : null
-                  }
-                </Col>
+                
         
                 <Col>
                     <Alert variant={mensajes.error ? 'danger' : 'primary' }>
