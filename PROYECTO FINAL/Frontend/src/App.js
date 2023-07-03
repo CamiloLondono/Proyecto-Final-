@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import {hacerPeticion, iniciarSesion} from './servicios/clienteaxios.js';
 
+
+//Separar todo por carpetas, asi sera mas facil ordenar todo, poner cada cosa en la carpeta de componentes
+
 function App() {
   const [formulario, setFormulario] = useState({
     Usuarios: '',

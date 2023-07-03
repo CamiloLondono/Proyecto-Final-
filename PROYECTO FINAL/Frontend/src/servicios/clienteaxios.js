@@ -14,7 +14,7 @@ export const hacerPeticion = async (informacion) => {
     try {
       const configuracion = crearConfiguracion("post", "usuarios/", informacion);
       const respuesta = await axios(configuracion);
-      if (respuesta && respuesta.data) {
+      if (respuesta && respuesta.data === 201) {
         console.log(respuesta.data);
         return respuesta
         // Hacer algo con los datos de la respuesta
@@ -24,19 +24,16 @@ export const hacerPeticion = async (informacion) => {
     }
   };
 
-export const iniciarSesion = async (usuario, contraseña) => {
+export const obtenerUsuarios = async () => {
   try {
-    const configuracion = crearConfiguracion("post", "usuarios/", { usuario, contraseña });
-    const respuesta = await axios(configuracion);
-    if (respuesta && respuesta.data) {
-      console.log(respuesta.data);
-      // Extraer el token de la respuesta y devolverlo
-      const token = respuesta.data.token;
-      return token;
-    }
+      const configuracion = crearConfiguracion("get", "usuarios/");
+      const respuesta = await axios(configuracion);
+      if (respuesta.status === 200) {
+          console.log(respuesta.data);
+      }
+      return respuesta.data;
   } catch (error) {
-    console.log(error);
-    throw new Error("Error al iniciar sesión");
+      console.log(error);
   }
 };
   
